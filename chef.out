@@ -1,0 +1,123 @@
+Starting Chef Client, version 14.4.56[0m
+resolving cookbooks for run list: ["apt", "chef-client", "editor", "sudo", "users::sysadmins", "htop", "set-hostname", "provisioner::bashrc", "provisioner::screen", "provisioner::swap", "zsh", "oh-my-zsh", "chef_deploy::nginx_config", "chef_deploy::app_deploy"][0m
+Synchronizing Cookbooks:[0m
+  - logrotate (2.2.0)[0m
+  - apt (7.0.0)[0m
+  - htop (2.0.0)[0m
+  - yum-epel (3.2.0)[0m
+  - chef-client (11.0.1)[0m
+  - zsh (2.0.0)[0m
+  - multipackage (3.0.30)[0m
+  - magic_shell (1.0.0)[0m
+  - sudo (2.7.2)[0m
+  - cron (6.2.1)[0m
+  - editor (0.2.0)[0m
+  - users (4.0.3)[0m
+  - yum-repoforge (3.0.0)[0m
+  - set-hostname (1.1.0)[0m
+  - provisioner (1.0.12)[0m
+  - compat_resource (12.19.1)[0m
+  - oh-my-zsh (0.4.8)[0m
+  - git (9.0.1)[0m
+  - build-essential (8.2.1)[0m
+  - seven_zip (3.0.0)[0m
+  - windows (5.1.1)[0m
+  - mingw (2.1.0)[0m
+  - chef_deploy (0.1.0)[0m
+Installing Cookbook Gems:[0m
+Compiling Cookbooks...[0m
+[2018-09-20T03:43:11+00:00] WARN: The sysadmins recipe has been deprecated. We suggest using the users_manage resource in your own cookbook if you need similar functionality. The resource in this recipe will be removed with a major release of the cookbook in April 2017
+Converging 45 resources[0m
+Recipe: apt::default[0m
+  * file[/var/lib/apt/periodic/update-success-stamp] action nothing (skipped due to action :nothing)
+  * apt_update[periodic] action periodic (up to date)
+  * execute[apt-get update] action nothing (skipped due to action :nothing)
+  * execute[apt-get autoremove] action nothing (skipped due to action :nothing)
+  * execute[apt-get autoclean] action nothing (skipped due to action :nothing)
+  * directory[/var/cache/local] action create (up to date)
+  * directory[/var/cache/local/preseeding] action create (up to date)
+  * template[/etc/apt/apt.conf.d/10dpkg-options] action create (up to date)
+  * template[/etc/apt/apt.conf.d/10recommends] action create (up to date)
+  * apt_package[apt-transport-https] action install (up to date)
+Recipe: chef-client::init_service[0m
+  * directory[/var/run/chef] action create (up to date)
+  * directory[/var/cache/chef] action create (up to date)
+  * directory[/var/lib/chef] action create (up to date)
+  * directory[/var/log/chef] action create (up to date)
+  * directory[/etc/chef] action create (up to date)
+  * template[/etc/init.d/chef-client] action create (up to date)
+  * template[/etc/default/chef-client] action create (up to date)
+  * service[chef-client] action enable (up to date)
+  * service[chef-client] action start (up to date)
+Recipe: editor::default[0m
+  * magic_shell_environment[EDITOR] action add
+  Recipe: <Dynamically Defined Resource>[0m
+    * file[/etc/profile.d/EDITOR.sh] action create (up to date)
+     (up to date)
+Recipe: editor::default[0m
+  * magic_shell_environment[VISUAL] action add
+  Recipe: <Dynamically Defined Resource>[0m
+    * file[/etc/profile.d/VISUAL.sh] action create (up to date)
+     (up to date)
+Recipe: sudo::default[0m
+  * apt_package[sudo] action install (skipped due to not_if)
+  * directory[/etc/sudoers.d] action create (up to date)
+  * cookbook_file[/etc/sudoers.d/README] action create (up to date)
+  * template[/etc/sudoers] action create (up to date)
+Recipe: users::sysadmins[0m
+  * users_manage[sysadmin] action remove (up to date)
+  * users_manage[sysadmin] action create
+    * group[jaddy] action create (skipped due to only_if)
+    * linux_user[jaddy] action create (up to date)
+    * directory[/home/jaddy/.ssh] action create (up to date)
+    * template[/home/jaddy/.ssh/authorized_keys] action create (up to date)
+    * group[sysadmin] action create (up to date)
+     (up to date)
+Recipe: htop::default[0m
+  * apt_package[htop] action install (up to date)
+Recipe: set-hostname::hostname[0m
+  * execute[sets hostname to 'sandbox1.addynet.com'] action run
+    [32m- execute hostname sandbox1.addynet.com[0m
+[0mRecipe: set-hostname::hosts-file[0m
+  * template[/etc/hosts] action create (up to date)
+Recipe: set-hostname::default[0m
+  * ohai[reload] action reload
+    [32m- re-run ohai and merge results into node attributes[0m
+[0mRecipe: provisioner::bashrc[0m
+  * template[/etc/skel/.bashrc] action create (up to date)
+Recipe: provisioner::screen[0m
+  * apt_package[screen] action install (up to date)
+  * template[/home/jaddy/.screenrc] action create_if_missing (up to date)
+Recipe: provisioner::swap[0m
+  * swap_file[/mnt/swap] action create (up to date)
+Recipe: zsh::default[0m
+  * multipackage_internal[collected packages install] action install (up to date)
+  * apt_package[collected packages install] action install (up to date)
+Recipe: git::package[0m
+  * git_client[default] action install
+    * apt_package[default :create git] action install (up to date)
+     (up to date)
+Recipe: oh-my-zsh::default[0m
+  * git[/home/jaddy/.oh-my-zsh] action checkout (skipped due to not_if)
+  * template[/home/jaddy/.zshrc] action create_if_missing (up to date)
+  * template[/home/jaddy/.oh-my-zsh/themes/clean.zsh-theme] action create (up to date)
+Recipe: chef_deploy::nginx_config[0m
+  * template[/etc/nginx/sites-available/example] action create (up to date)
+  * link[/etc/nginx/sites-enabled/example] action create (up to date)
+  * template[/tmp/nodes] action create (up to date)
+  * cookbook_file[/tmp/check.sh] action create (up to date)
+  * execute[check_nodes] action run
+    [32m- execute /bin/bash /tmp/check.sh[0m
+[0mRecipe: chef_deploy::app_deploy[0m
+  * directory[/srv/example] action create (up to date)
+  * git[/srv/example] action sync (up to date)
+[0m
+Running handlers:[0m
+Running handlers complete
+[0m[0m
+Deprecated features used![0m
+  Resource sudo has been loaded from a cookbook. The resource sudo is now included in Chef and will take precedence over the existing cookbook resource in the next major release of Chef (15.0, April 2019). You may be able to remove this cookbook dependency from your runlist if you do not use other recipes/resources/libraries from the cookbook. Alternatively there may be a newer version of this cookbook without the sudo resource. at 1 location:[0m
+    - /opt/chef/embedded/lib/ruby/gems/2.5.0/gems/chef-14.4.56/lib/chef/log.rb:51:in `caller_location'[0m
+   See https://docs.chef.io/deprecations_map_collision.html for further details.[0m
+[0m
+Chef Client finished, 3/56 resources updated in 04 seconds[0m
